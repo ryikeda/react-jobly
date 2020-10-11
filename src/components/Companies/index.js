@@ -1,18 +1,18 @@
 import React from "react";
 import {
   Container,
-  TextField,
   Box,
   Card,
   CardContent,
   Typography,
-  CardActions,
-  Button,
   IconButton,
-  InputAdornment,
+  CardHeader,
 } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
+
+import BusinessIcon from "@material-ui/icons/Business";
 import { makeStyles } from "@material-ui/core/styles";
+
+import SearchBar from "../SearchBar";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -20,33 +20,21 @@ const Companies = () => {
   const classes = useStyles();
   return (
     <Container>
-      <Box m={3}>
-        <Container maxWidth="sm">
-          <TextField
-            variant="outlined"
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment>
-                  <IconButton>
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Container>
-      </Box>
+      <SearchBar />
       <Card>
+        <CardHeader
+          action={
+            <IconButton aria-label="settings">
+              <BusinessIcon />
+            </IconButton>
+          }
+          title="Company Name"
+        />
         <CardContent>
-          <Typography variant="h6"> Company name</Typography>
           <Typography variant="body2" component="p">
-            Company description
+            Company descriptionacnlasncklanscknslkncalknc
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     </Container>
   );

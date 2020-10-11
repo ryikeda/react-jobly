@@ -26,7 +26,7 @@ const NavBar = () => {
   return (
     <>
       <AppBar>
-        <Toolbar>
+        <Toolbar position="static">
           <Typography variant="h6" className={classes.title}>
             <NavLink to="/" className={classes.navLink}>
               Jobly
