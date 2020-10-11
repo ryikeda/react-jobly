@@ -18,7 +18,7 @@ const Routes = () => {
       <Route exact path="/companies">
         <Companies />
       </Route>
-      <Route exact path="/companies/:company">
+      <Route exact path="/companies/:handle">
         <Company
           name="Company Name"
           description="This is the company description"
