@@ -4,6 +4,8 @@ import Home from "../Home";
 import Companies from "../Companies";
 import Jobs from "../Jobs";
 import Profile from "../Profile";
+import Login from "../Login";
+import SignUp from "../Signup";
 import Logout from "../Logout";
 
 const Routes = () => {
@@ -22,7 +24,18 @@ const Routes = () => {
         <Jobs />
       </Route>
       <Route exact path="/profile">
-        <Profile />
+        <Profile
+          username="rafael"
+          firstName="Rafael"
+          lastName="Ikeda"
+          email="rafael@email.com"
+        />
+      </Route>
+      <Route exact path="/login">
+        <Login />
+      </Route>
+      <Route exact path="/signup">
+        <SignUp />
       </Route>
       <Route exact path="/logout">
         <Logout />
