@@ -1,41 +1,37 @@
 import React from "react";
-import {
-  Container,
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  IconButton,
-  CardHeader,
-} from "@material-ui/core";
-
-import BusinessIcon from "@material-ui/icons/Business";
-import { makeStyles } from "@material-ui/core/styles";
+import { Container } from "@material-ui/core";
 
 import SearchBar from "../SearchBar";
-
-const useStyles = makeStyles((theme) => ({}));
+import CompanyCard from "../CompanyCard";
 
 const Companies = () => {
-  const classes = useStyles();
   return (
     <Container>
       <SearchBar />
-      <Card>
-        <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <BusinessIcon />
-            </IconButton>
-          }
-          title="Company Name"
-        />
-        <CardContent>
-          <Typography variant="body2" component="p">
-            Company descriptionacnlasncklanscknslkncalknc
-          </Typography>
-        </CardContent>
-      </Card>
+      <CompanyCard
+        name="Company Name"
+        description="This is the company description"
+      />
+      <CompanyCard
+        name="Company Name"
+        description="This is the company description"
+      />
+      <CompanyCard
+        name="Company Name"
+        description="This is the company description"
+      />
+      <CompanyCard
+        name="Company Name"
+        description="This is the company description"
+      />
+      <CompanyCard
+        name="Company Name"
+        description="This is the company description"
+      />
+      <CompanyCard
+        name="Company Name"
+        description="This is the company description"
+      />
     </Container>
   );
 };
