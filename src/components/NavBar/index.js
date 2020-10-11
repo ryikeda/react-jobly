@@ -16,6 +16,9 @@ import {
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    marginBottom: theme.spacing(2),
+  },
   navLink: {
     textDecoration: "none",
     color: "white",
@@ -38,7 +41,7 @@ const NavBar = () => {
     setAnchorEl(null);
   };
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.root}>
       <Toolbar>
         <Grid container alignItems="center">
           <Grid item xs={2}>
