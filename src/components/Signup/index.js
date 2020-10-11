@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -14,6 +14,7 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { makeStyles } from "@material-ui/core/styles";
+import JoblyApi from "../JoblyApi";
 
 function Copyright() {
   const classes = useStyles();
@@ -52,8 +53,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = () => {
+const SignUp = ({ setToken }) => {
+  const history = useHistory();
   const classes = useStyles();
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((data) => ({ ...data, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = await JoblyApi.register(formData);
+    if (token) {
+      setToken(token);
+      history.push("/jobs");
+    }
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -64,17 +88,19 @@ const SignUp = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
-                name="firstName"
+                name="first_name"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
+                id="first_name"
                 label="First Name"
+                value={formData.firstName}
+                onChange={handleChange}
                 autoFocus
               />
             </Grid>
@@ -83,9 +109,11 @@ const SignUp = () => {
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
+                id="last_name"
                 label="Last Name"
-                name="lastName"
+                name="last_name"
+                value={formData.lastName}
+                onChange={handleChange}
                 autoComplete="lname"
               />
             </Grid>
@@ -98,6 +126,8 @@ const SignUp = () => {
                 label="Username"
                 name="username"
                 autoComplete="Username"
+                value={formData.username}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -109,6 +139,8 @@ const SignUp = () => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={formData.email}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -121,6 +153,8 @@ const SignUp = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={formData.password}
+                onChange={handleChange}
               />
             </Grid>
           </Grid>

@@ -39,7 +39,7 @@ const Routes = ({ setToken }) => {
         <Login setToken={setToken} />
       </Route>
       <Route exact path="/signup">
-        <SignUp />
+        <SignUp setToken={setToken} />
       </Route>
       <Route exact path="/logout">
         <Logout />

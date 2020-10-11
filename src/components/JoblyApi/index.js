@@ -1,11 +1,11 @@
 import axios from "axios";
+import { TOKEN_STORAGE_ID } from "../../App";
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
 
 class JoblyApi {
   static async request(endpoint, params = {}, verb = "get") {
-    let _token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJpYXQiOjE2MDI0MTAyMTF9.OtECMgY20MWrYFSDwBeYazvMkUoRwmbV-B2ELyr1P2A";
+    let _token = localStorage.getItem(TOKEN_STORAGE_ID);
 
     console.debug("API Call:", endpoint, params, verb);
 
@@ -51,6 +51,10 @@ class JoblyApi {
 
   static async login(data) {
     let res = await this.request(`login`, data, "post");
+    return res.token;
+  }
+  static async register(data) {
+    let res = await this.request(`users`, data, "post");
     return res.token;
   }
 }

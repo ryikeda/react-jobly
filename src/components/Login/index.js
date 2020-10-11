@@ -68,8 +68,10 @@ const Login = ({ setToken }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = await JoblyApi.login(formData);
-    setToken(token);
-    history.push("/jobs");
+    if (token) {
+      setToken(token);
+      history.push("/jobs");
+    }
   };
 
   return (
