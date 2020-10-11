@@ -5,7 +5,7 @@ const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
 class JoblyApi {
   static async request(endpoint, params = {}, verb = "get") {
     let _token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpYXQiOjE2MDIzMjcyNzZ9.vKVkrmRvQ_ec2szEvWao2wI2ld2fHgJVBfWWbzBEpd8";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJpYXQiOjE2MDI0MTAyMTF9.OtECMgY20MWrYFSDwBeYazvMkUoRwmbV-B2ELyr1P2A";
 
     console.debug("API Call:", endpoint, params, verb);
 
@@ -43,6 +43,10 @@ class JoblyApi {
   static async getJobs(search) {
     let res = await this.request("jobs", { search });
     return res.jobs;
+  }
+  static async getCurrentUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
   }
 }
 
