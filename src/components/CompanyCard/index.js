@@ -16,7 +16,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CompanyCard = ({ name, description, logo_url, handle = "/" }) => {
+const CompanyCard = ({
+  name,
+  description,
+  logo_url,
+  handle = "/companies/company",
+}) => {
   const classes = useStyles();
 
   return (
