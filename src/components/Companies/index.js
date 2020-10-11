@@ -3,7 +3,7 @@ import { Container } from "@material-ui/core";
 
 import JoblyApi from "../JoblyApi";
 import SearchBar from "../SearchBar";
-import CompanyCard from "../CompanyCard";
+import CompaniesList from "../CompaniesList";
 
 const Companies = () => {
   const [companies, setCompanies] = useState([]);
@@ -15,20 +15,15 @@ const Companies = () => {
     }
     getCompanies();
   }, []);
+
+  const handleSearch = async (searchTerm) => {
+    const companies = await JoblyApi.getCompanies(searchTerm);
+    setCompanies(companies);
+  };
   return (
     <Container>
-      <SearchBar />
-      {companies.map((company) => {
-        return (
-          <CompanyCard
-            name={company.name}
-            description={company.description}
-            handle={company.handle}
-            logo_url={company.logo_url}
-            key={company.handle}
-          />
-        );
-      })}
+      <SearchBar handleSearch={handleSearch} />
+      <CompaniesList companies={companies} />
     </Container>
   );
 };

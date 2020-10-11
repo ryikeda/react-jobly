@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   TextField,
@@ -8,23 +8,36 @@ import {
 
 import SearchIcon from "@material-ui/icons/Search";
 
-const SearchBar = () => {
+const SearchBar = ({ handleSearch }) => {
+  const [search, setSeach] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearch(search);
+  };
+
+  const handleChange = (e) => {
+    setSeach(e.target.value);
+  };
+
   return (
     <Container maxWidth="sm">
-      <TextField
-        variant="outlined"
-        fullWidth
-        placeholder="Search"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment>
-              <IconButton>
-                <SearchIcon />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
+      <form onSubmit={handleSubmit}>
+        <TextField
+          variant="outlined"
+          fullWidth
+          placeholder="Search"
+          onChange={handleChange}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment>
+                <IconButton>
+                  <SearchIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </form>
     </Container>
   );
 };

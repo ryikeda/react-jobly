@@ -13,7 +13,6 @@ const Company = () => {
     async function getCompany() {
       const company = await JoblyApi.getCompany(handle);
       setCompany(company);
-      console.log(company);
     }
     getCompany();
   }, [handle]);
