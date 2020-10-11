@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = () => {
+const NavBar = ({ handleLogout }) => {
   const { currUser } = useContext(UserContext);
 
   const classes = useStyles();
@@ -98,10 +98,13 @@ const NavBar = () => {
                     Profile
                   </NavLink>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <NavLink to="/logout" className={classes.navLinkMenu}>
-                    Logout
-                  </NavLink>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    handleLogout();
+                  }}
+                >
+                  Logout
                 </MenuItem>
               </Menu>
             </Grid>

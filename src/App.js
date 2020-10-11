@@ -29,11 +29,16 @@ function App() {
     }
     getCurrentUser();
   }, [token]);
+
+  const handleLogout = () => {
+    setCurrUser(null);
+    setToken(null);
+  };
   return (
     <Router>
       <UserContext.Provider value={{ currUser, setCurrUser }}>
         <div className="App">
-          <NavBar />
+          <NavBar handleLogout={handleLogout} />
           <Routes setToken={setToken} />
         </div>
       </UserContext.Provider>
