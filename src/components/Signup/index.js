@@ -5,7 +5,6 @@ import {
   Button,
   CssBaseline,
   TextField,
-  Link,
   Box,
   Typography,
   Container,
@@ -17,12 +16,13 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 
 function Copyright() {
+  const classes = useStyles();
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="#">
+      <NavLink to="/" className={classes.navLink}>
         Jobly
-      </Link>{" "}
+      </NavLink>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>

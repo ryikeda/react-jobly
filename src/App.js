@@ -6,12 +6,15 @@ import NavBar from "./components/NavBar";
 import Routes from "./components/Routes";
 import JoblyApi from "./components/JoblyApi";
 import UserContext from "./components/UserContext";
+import useLocalStorage from "./components/hooks/useLocalStorage";
+
+export const TOKEN_STORAGE_ID = "jobly-token";
 
 const TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJpYXQiOjE2MDI0MTAyMTF9.OtECMgY20MWrYFSDwBeYazvMkUoRwmbV-B2ELyr1P2A";
 
 function App() {
-  const [token, setToken] = useState(TOKEN);
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [currUser, setCurrUser] = useState(null);
 
   useEffect(() => {
@@ -25,13 +28,13 @@ function App() {
       }
     }
     getCurrentUser();
-  }, []);
+  }, [token]);
   return (
     <Router>
       <UserContext.Provider value={{ currUser, setCurrUser }}>
         <div className="App">
           <NavBar />
-          <Routes />
+          <Routes setToken={setToken} />
         </div>
       </UserContext.Provider>
     </Router>

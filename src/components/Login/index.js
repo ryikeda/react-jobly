@@ -1,11 +1,10 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import {
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  Link,
   Box,
   Typography,
   Container,
@@ -14,14 +13,16 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { makeStyles } from "@material-ui/core/styles";
+import JoblyApi from "../JoblyApi";
 
 function Copyright() {
+  const classes = useStyles();
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="#">
+      <NavLink to="/" className={classes.navLink}>
         Jobly
-      </Link>{" "}
+      </NavLink>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -51,8 +52,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = ({ setToken }) => {
+  const history = useHistory();
   const classes = useStyles();
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((data) => ({ ...data, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = await JoblyApi.login(formData);
+    setToken(token);
+    history.push("/jobs");
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -63,16 +82,18 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            value={formData.username}
+            onChange={handleChange}
             autoFocus
           />
           <TextField
@@ -84,6 +105,8 @@ const Login = () => {
             label="Password"
             type="password"
             id="password"
+            value={formData.password}
+            onChange={handleChange}
             autoComplete="current-password"
           />
           <Button

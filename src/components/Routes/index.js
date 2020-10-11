@@ -9,7 +9,7 @@ import Login from "../Login";
 import SignUp from "../Signup";
 import Logout from "../Logout";
 
-const Routes = () => {
+const Routes = ({ setToken }) => {
   return (
     <Switch>
       <Route exact path="/">
@@ -36,7 +36,7 @@ const Routes = () => {
         />
       </Route>
       <Route exact path="/login">
-        <Login />
+        <Login setToken={setToken} />
       </Route>
       <Route exact path="/signup">
         <SignUp />
