@@ -46,7 +46,9 @@ const NavBar = () => {
         <Grid container alignItems="center">
           <Grid item xs={2}>
             <Typography variant="h6" className={classes.title}>
-              Jobly
+              <NavLink to="/login" className={classes.navLink}>
+                Jobly
+              </NavLink>
             </Typography>
           </Grid>
           <Grid item xs={8}>
