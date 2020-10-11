@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const JobCard = ({ title, salary, equity, state, company_handle }) => {
+const JobCard = ({ title, salary, equity, company_handle }) => {
   const classes = useStyles();
   return (
     <Card variant="outlined" className={classes.card}>
@@ -25,9 +25,6 @@ const JobCard = ({ title, salary, equity, state, company_handle }) => {
             </Typography>
             <Typography variant="body2" component="p">
               Equity: {equity}
-            </Typography>
-            <Typography variant="body2" component="p">
-              State: {state}
             </Typography>
           </Grid>
           <Grid item container justify="center" xs={2}>

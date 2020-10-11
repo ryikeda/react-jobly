@@ -25,7 +25,7 @@ const CompanyCard = ({
   const classes = useStyles();
 
   return (
-    <NavLink to={handle} className={classes.navLink}>
+    <NavLink to={`/companies/${handle}`} className={classes.navLink}>
       <Card variant="outlined" className={classes.card}>
         <CardContent>
           <Grid container alignItems="center">

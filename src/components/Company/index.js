@@ -1,27 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import { Container, Typography, Grid, Avatar } from "@material-ui/core";
-import BusinessIcon from "@material-ui/icons/Business";
+import { Container, Typography, Grid } from "@material-ui/core";
 import JobCard from "../JobCard";
+import JoblyApi from "../JoblyApi";
 
-const Company = ({ name, description }) => {
+const Company = () => {
+  const { handle } = useParams();
+  const [company, setCompany] = useState(null);
+
+  useEffect(() => {
+    async function getCompany() {
+      const company = await JoblyApi.getCompany(handle);
+      setCompany(company);
+      console.log(company);
+    }
+    getCompany();
+  }, [handle]);
+
+  if (!company) {
+    return <div>Loading....</div>;
+  }
   return (
     <Container>
       <Grid container alignItems="center">
         <Grid item xs={12}>
           <Typography variant="h6" component="p">
-            {name}
+            {company.name}
           </Typography>
           <Typography variant="body2" component="p">
-            {description}
+            {company.description}
           </Typography>
         </Grid>
       </Grid>
-      <JobCard salary="90000" equity="0.1" state="MI" />
-      <JobCard salary="90000" equity="0.1" state="MI" />
-      <JobCard salary="90000" equity="0.1" state="MI" />
-      <JobCard salary="90000" equity="0.1" state="MI" />
-      <JobCard salary="90000" equity="0.1" state="MI" />
+      {company.jobs.map((job) => {
+        return (
+          <JobCard
+            title={job.title}
+            salary={job.salary}
+            equity={job.equity}
+            key={job.id}
+          />
+        );
+      })}
     </Container>
   );
 };
