@@ -7,7 +7,6 @@ import Jobs from "../Jobs";
 import Profile from "../Profile";
 import Login from "../Login";
 import SignUp from "../Signup";
-import Logout from "../Logout";
 import PrivateRoute from "../PrivateRoute";
 
 const Routes = ({ setToken }) => {

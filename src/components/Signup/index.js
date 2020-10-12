@@ -10,6 +10,7 @@ import {
   Container,
   Grid,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
@@ -62,6 +63,7 @@ const SignUp = ({ setToken }) => {
     username: "",
     email: "",
     password: "",
+    errors: [],
   });
 
   const handleChange = (e) => {
@@ -71,10 +73,20 @@ const SignUp = ({ setToken }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await JoblyApi.register(formData);
-    if (token) {
+    try {
+      const data = {
+        username: formData.username,
+        password: formData.password,
+        first_name: formData.first_name || undefined,
+        last_name: formData.last_name || undefined,
+        email: formData.email || undefined,
+      };
+
+      const token = await JoblyApi.register(data);
       setToken(token);
       history.push("/jobs");
+    } catch (errors) {
+      return setFormData((data) => ({ ...data, errors }));
     }
   };
 
@@ -88,6 +100,13 @@ const SignUp = ({ setToken }) => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
+        <Box m={3}>
+          {formData.errors.length ? (
+            <Alert variant="outlined" severity="error">
+              {formData.errors.map((e) => e)}
+            </Alert>
+          ) : null}
+        </Box>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>

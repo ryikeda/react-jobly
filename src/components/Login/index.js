@@ -9,7 +9,7 @@ import {
   Typography,
   Container,
 } from "@material-ui/core";
-
+import Alert from "@material-ui/lab/Alert";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -58,6 +58,7 @@ const Login = ({ setToken }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+    errors: [],
   });
 
   const handleChange = (e) => {
@@ -67,10 +68,12 @@ const Login = ({ setToken }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await JoblyApi.login(formData);
-    if (token) {
+    try {
+      const token = await JoblyApi.login(formData);
       setToken(token);
       history.push("/jobs");
+    } catch (errors) {
+      return setFormData((data) => ({ ...data, errors }));
     }
   };
 
@@ -84,6 +87,13 @@ const Login = ({ setToken }) => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        <Box m={3}>
+          {formData.errors.length ? (
+            <Alert variant="outlined" severity="error">
+              {formData.errors.map((e) => e)}
+            </Alert>
+          ) : null}
+        </Box>
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
