@@ -44,6 +44,10 @@ class JoblyApi {
     let res = await this.request("jobs", { search });
     return res.jobs;
   }
+  static async getJobsByHandle(handle) {
+    let res = await this.request("jobs", { handle });
+    return res.jobs;
+  }
   static async getCurrentUser(username) {
     let res = await this.request(`users/${username}`);
     return res.user;
@@ -61,6 +65,10 @@ class JoblyApi {
   static async saveProfile(username, data) {
     let res = await this.request(`users/${username}`, data, "patch");
     return res.user;
+  }
+  static async applyToJob(id) {
+    let res = await this.request(`jobs/${id}/apply`, {}, "post");
+    return res.message;
   }
 }
 

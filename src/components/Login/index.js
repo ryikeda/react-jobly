@@ -19,14 +19,24 @@ import JoblyApi from "../JoblyApi";
 function Copyright() {
   const classes = useStyles();
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <NavLink to="/" className={classes.navLink}>
-        Jobly
-      </NavLink>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <>
+      <Typography variant="body2" color="textSecondary" align="center">
+        {"Copyright © "}
+        <NavLink to="/" className={classes.navLink}>
+          Jobly
+        </NavLink>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+      <Box p={3}>
+        <Typography variant="p">
+          feel free to use this credentials to login
+          <br />
+          username: <b>user</b> password:
+          <b> user123456</b>
+        </Typography>
+      </Box>
+    </>
   );
 }
 

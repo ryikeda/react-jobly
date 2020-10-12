@@ -9,8 +9,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const JobCard = ({ title, salary, equity, company_handle }) => {
+const JobCard = ({ job, apply }) => {
   const classes = useStyles();
+  const handleApply = () => {
+    if (!apply) return null;
+    return apply(id);
+  };
+  const { title, salary, equity, id, state } = job;
+
   return (
     <Card variant="outlined" className={classes.card}>
       <CardContent>
@@ -27,7 +33,13 @@ const JobCard = ({ title, salary, equity, company_handle }) => {
             </Typography>
           </Grid>
           <Grid item container justify="center" xs={2}>
-            <Button>Apply</Button>
+            {state ? (
+              <Button variant="contained">Applied</Button>
+            ) : (
+              <Button variant="contained" onClick={handleApply}>
+                Apply
+              </Button>
+            )}
           </Grid>
         </Grid>
       </CardContent>

@@ -21,18 +21,18 @@ const Jobs = () => {
     setJobs(jobs);
   };
 
+  const apply = async (jobId) => {
+    let result = await JoblyApi.applyToJob(jobId);
+    setJobs((job) =>
+      job.map((job) => (job.id === jobId ? { ...job, state: result } : job))
+    );
+  };
+
   return (
     <Container>
       <SearchBar handleSearch={handleSearch} />
       {jobs.map((job) => {
-        return (
-          <JobCard
-            title={job.title}
-            salary={job.salary}
-            equity={job.equity}
-            key={job.id}
-          />
-        );
+        return <JobCard job={job} apply={apply} />;
       })}
     </Container>
   );
