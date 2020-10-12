@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "../Home";
 import Companies from "../Companies";
 import Company from "../Company";
@@ -35,6 +35,9 @@ const Routes = ({ setToken }) => {
       </Route>
       <Route exact path="/signup">
         <SignUp setToken={setToken} />
+      </Route>
+      <Route>
+        <Redirect to="/" />
       </Route>
     </Switch>
   );
