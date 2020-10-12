@@ -1,7 +1,9 @@
 import axios from "axios";
 import { TOKEN_STORAGE_ID } from "../../App";
 
-const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
+const BASE_URL =
+  process.env.BASE_URL || "https://ry-jobly-backend.herokuapp.com/";
+// const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
 
 class JoblyApi {
   static async request(endpoint, params = {}, verb = "get") {
