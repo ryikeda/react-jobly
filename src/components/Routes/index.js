@@ -8,6 +8,7 @@ import Profile from "../Profile";
 import Login from "../Login";
 import SignUp from "../Signup";
 import Logout from "../Logout";
+import PrivateRoute from "../PrivateRoute";
 
 const Routes = ({ setToken }) => {
   return (
@@ -15,29 +16,26 @@ const Routes = ({ setToken }) => {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route exact path="/companies">
+      <PrivateRoute exact path="/companies">
         <Companies />
-      </Route>
-      <Route exact path="/companies/:handle">
+      </PrivateRoute>
+      <PrivateRoute exact path="/companies/:handle">
         <Company
           name="Company Name"
           description="This is the company description"
         />
-      </Route>
-      <Route exact path="/jobs">
+      </PrivateRoute>
+      <PrivateRoute exact path="/jobs">
         <Jobs />
-      </Route>
-      <Route exact path="/profile">
+      </PrivateRoute>
+      <PrivateRoute exact path="/profile">
         <Profile />
-      </Route>
+      </PrivateRoute>
       <Route exact path="/login">
         <Login setToken={setToken} />
       </Route>
       <Route exact path="/signup">
         <SignUp setToken={setToken} />
-      </Route>
-      <Route exact path="/logout">
-        <Logout />
       </Route>
     </Switch>
   );

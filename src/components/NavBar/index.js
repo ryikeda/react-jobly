@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../UserContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 import {
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavBar = ({ handleLogout }) => {
+  const history = useHistory();
   const { currUser } = useContext(UserContext);
 
   const classes = useStyles();
@@ -44,6 +45,11 @@ const NavBar = ({ handleLogout }) => {
     setAnchorEl(null);
   };
 
+  const handleNavlogout = () => {
+    handleClose();
+    handleLogout();
+    history.push("/");
+  };
   const loggedInNav = () => {
     return (
       <AppBar position="static" className={classes.root}>
@@ -98,14 +104,7 @@ const NavBar = ({ handleLogout }) => {
                     Profile
                   </NavLink>
                 </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    handleClose();
-                    handleLogout();
-                  }}
-                >
-                  Logout
-                </MenuItem>
+                <MenuItem onClick={handleNavlogout}>Logout</MenuItem>
               </Menu>
             </Grid>
           </Grid>
