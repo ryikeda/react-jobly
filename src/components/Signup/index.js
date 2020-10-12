@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
+import UserContext from "../UserContext";
 import {
   Avatar,
   Button,
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = ({ setToken }) => {
+  const { currUser } = useContext(UserContext);
   const history = useHistory();
   const classes = useStyles();
   const [formData, setFormData] = useState({
@@ -65,6 +67,9 @@ const SignUp = ({ setToken }) => {
     password: "",
     errors: [],
   });
+  if (currUser) {
+    history.push("/");
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
