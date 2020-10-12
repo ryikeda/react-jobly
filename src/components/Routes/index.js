@@ -28,12 +28,7 @@ const Routes = ({ setToken }) => {
         <Jobs />
       </Route>
       <Route exact path="/profile">
-        <Profile
-          username="rafael"
-          firstName="Rafael"
-          lastName="Ikeda"
-          email="rafael@email.com"
-        />
+        <Profile />
       </Route>
       <Route exact path="/login">
         <Login setToken={setToken} />
