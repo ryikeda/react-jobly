@@ -30,7 +30,7 @@ function Copyright() {
       </Typography>
       <Box p={3}>
         <Typography variant="p">
-          feel free to use this credentials to login
+          feel free to use this to login
           <br />
           username: <b>user</b> password:
           <b> user123456</b>
